@@ -1,41 +1,17 @@
-class Solution {
-    public int majorityElement(int[] nums) {
-        int count = 0;
-        Integer candidate = null;
-        
-        for (int num : nums) {
-            if (count == 0) {
-                candidate = num;
+class Solution{
+    public int majorityElement(int[] nums){
+        int freq = 0, ans = 0;
+        for(int i = 0;i<nums.length;i++){
+            if(freq == 0){
+                ans = nums[i];
             }
-            count += (num == candidate) ? 1 : -1;
+            if(nums[i] == ans){
+                freq++;
+            }else{
+                freq--;
+            }
         }
-        
-        return candidate;
+    return ans;
     }
 }
-// class Solution {
-//     public int majorityElement(int[] nums) {
-//         int n = nums.length;
-//         int majEle = -1;
-//         int max = nums[0];
-//         int min = nums[0];
-//         for(int i = 0;i<n;i++){
-//             if(nums[i]>max){
-//                 max = nums[i];
-//             }
-//             if(nums[i]<min){
-//                 min = nums[i];
-//             }
-//         }
-//         int freq[] = new int[max-min +1];
-//         for(int i =0;i<n;i++){
-//             freq[nums[i]-min]++;
-//         }
-//         for(int i =0;i<freq.length;i++){
-//             if(freq[i]>(n/2)){
-//                 majEle = i+min;
-//             }
-//         }
-//         return majEle;
-//     }
-// }
+// This implementation is done using boyes moore algo , I have simply considered the element at ith index to be the majority, and if it is majority than it should be there more than n/2 times , if I add 1 to the freq at every apperance and subtract 1 for every appearance , than for sure element with high majority left with the greater frequency.
