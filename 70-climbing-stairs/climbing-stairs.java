@@ -1,17 +1,21 @@
 class Solution {
     public int climbStairs(int n) {
-        if (n <= 3) return n;
+        int dp[] = new int[n+1];
+        Arrays.fill(dp,-1);
+        return countways(n,dp);
 
-        int prev1 = 3;
-        int prev2 = 2;
-        int cur = 0;
-
-        for (int i = 3; i < n; i++) {
-            cur = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = cur;
+    }
+    public int countways(int n, int[] dp){
+        if(n == 2 || n==1){
+            return n;
         }
-
-        return cur;        
+        if(n <= 0){
+            return 0;
+        }
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        dp[n] = countways(n-1,dp)+countways(n-2,dp);
+        return dp[n];
     }
 }
